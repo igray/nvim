@@ -8,6 +8,12 @@ vim.cmd [[
     autocmd BufWinEnter * :highlight ColorColumn guibg=#002933 gui=nocombine
   augroup end
 
+  augroup _lsp_highlight
+    autocmd!
+    autocmd BufWinEnter * hi LspReferenceRead ctermfg=142 guifg=#859900 ctermbg=23 guibg=#073642
+    autocmd BufWinEnter * hi LspReferenceWrite ctermfg=178 guifg=#b58900 ctermbg=23 guibg=#073642
+  augroup end
+
   augroup _git
     autocmd!
     autocmd FileType gitcommit setlocal wrap

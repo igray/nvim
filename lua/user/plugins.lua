@@ -61,6 +61,7 @@ return packer.startup(function(use)
   use "tpope/vim-rails"
   use "ellisonleao/glow.nvim"
   use "nvim-pack/nvim-spectre"
+  use "ibhagwan/fzf-lua"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out

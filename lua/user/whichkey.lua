@@ -88,7 +88,7 @@ local mappings = {
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = { "<cmd>FzfLua files<cr>", "Find files", },
   ["F"] = { "<cmd>FzfLua live_grep<cr>", "Find Text" },
-  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["P"] = { "<cmd>FzfProject<cr>", "Projects" },
   ["S"] = { "<cmd>lua require('spectre').open()<cr>", "Search/Replace" },
 
   b = {

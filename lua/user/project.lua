@@ -37,12 +37,31 @@ project.setup({
 
 	---@type string
 	---@usage path to store the project history for use in telescope
-  datapath = vim.fn.stdpath("data"),
+	datapath = vim.fn.stdpath("data"),
 })
 
-local tele_status_ok, telescope = pcall(require, "telescope")
-if not tele_status_ok then
+local fzf_status_ok, fzflua = pcall(require, "fzf-lua")
+if not fzf_status_ok then
 	return
 end
 
-telescope.load_extension('projects')
+vim.api.nvim_create_user_command(
+  "FzfProject",
+  function()
+    local opts = {}
+    opts.prompt = "Projects> "
+    opts.actions = {
+      ['default'] = function(selected)
+        vim.cmd("FzfLua files cwd=" .. selected[1])
+      end
+    }
+    -- projects are returned oldest first
+    local projects = project.get_recent_projects()
+    local recent_projects = {}
+    for i=#projects, 1, -1 do
+      recent_projects[#recent_projects+1] = projects[i]
+    end
+    fzflua.fzf_exec(recent_projects, opts)
+  end,
+  { nargs = 0 }
+)

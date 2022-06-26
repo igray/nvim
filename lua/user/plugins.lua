@@ -88,6 +88,7 @@ return packer.startup(function(use)
   use "simrat39/symbols-outline.nvim"
   use "ray-x/lsp_signature.nvim"
   use "RRethy/vim-illuminate"
+  use "b0o/SchemaStore.nvim"
 
   -- Treesitter
   use {

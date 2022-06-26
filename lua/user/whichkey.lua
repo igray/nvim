@@ -80,13 +80,13 @@ local opts = {
 
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
-  ["B"] = { "<cmd>FzfLua buffers<cr>", "Buffers", },
+  ["B"] = { "<cmd>FzfLua buffers<cr>", "Buffers" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  ["f"] = { "<cmd>FzfLua files<cr>", "Find files", },
+  ["f"] = { "<cmd>FzfLua files<cr>", "Find files" },
   ["F"] = { "<cmd>FzfLua live_grep<cr>", "Find Text" },
   ["P"] = { "<cmd>FzfProject<cr>", "Projects" },
   ["S"] = { "<cmd>lua require('spectre').open()<cr>", "Search/Replace" },
@@ -157,6 +157,7 @@ local mappings = {
       "Prev Diagnostic",
     },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+    o = { "<cmd>SymbolsOutline<cr>", "Outline" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     s = { "<cmd>FzfLua lsp_document_symbols<cr>", "Document Symbols" },

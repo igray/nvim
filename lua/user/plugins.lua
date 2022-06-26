@@ -60,6 +60,7 @@ return packer.startup(function(use)
   use "ellisonleao/glow.nvim"
   use "windwp/nvim-spectre"
   use "ibhagwan/fzf-lua"
+  use "norcalli/nvim-colorizer.lua"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
@@ -83,6 +84,7 @@ return packer.startup(function(use)
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "RRethy/vim-illuminate"
 
   -- Treesitter
   use {
@@ -90,6 +92,8 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
   use "JoosepAlviste/nvim-ts-context-commentstring"
+  use "p00f/nvim-ts-rainbow"
+  use "windwp/nvim-ts-autotag"
 
   -- Git
   use "lewis6991/gitsigns.nvim"

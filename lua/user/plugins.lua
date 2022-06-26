@@ -61,6 +61,7 @@ return packer.startup(function(use)
   use "windwp/nvim-spectre"
   use "ibhagwan/fzf-lua"
   use "norcalli/nvim-colorizer.lua"
+  use "rcarriga/nvim-notify"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out

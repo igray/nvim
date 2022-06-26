@@ -15,8 +15,8 @@ local setup = {
     -- No actual key bindings are created
     presets = {
       operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = true, -- adds help for motions
-      text_objects = true, -- help for text objects triggered after entering an operator
+      motions = false, -- adds help for motions
+      text_objects = false, -- help for text objects triggered after entering an operator
       windows = true, -- default bindings on <c-w>
       nav = true, -- misc bindings to work with windows
       z = true, -- bindings for folds, spelling and others prefixed with z
@@ -53,12 +53,12 @@ local setup = {
     height = { min = 4, max = 25 }, -- min and max height of the columns
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 3, -- spacing between columns
-    align = "left", -- align columns left, center or right
+    align = "center", -- align columns left, center or right
   },
   ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = true, -- show help message on the command line when the popup is visible
-  triggers = "auto", -- automatically setup triggers
+  show_help = false, -- show help message on the command line when the popup is visible
+  -- triggers = "auto", -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
@@ -78,18 +78,43 @@ local opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
+--[[local m_opts = {
+  mode = "n", -- NORMAL mode
+  prefix = "m",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local m_mappings = {
+  a = { "<cmd>BookmarkAnnotate<cr>", "Annotate" },
+  c = { "<cmd>BookmarkClear<cr>", "Clear" },
+  m = { "<cmd>BookmarkToggle<cr>", "Toggle" },
+  h = { '<cmd>lua require("harpoon.mark").add_file()<cr>', "Harpoon" },
+  j = { "<cmd>BookmarkNext<cr>", "Next" },
+  k = { "<cmd>BookmarkPrev<cr>", "Prev" },
+  s = { "<cmd>BookmarkShowAll<cr>", "Prev" },
+  -- s = {
+  --   "<cmd>lua require('telescope').extensions.vim_bookmarks.all({ hide_filename=false, prompt_title=\"bookmarks\", shorten_path=false })<cr>",
+  --   "Show",
+  -- },
+  x = { "<cmd>BookmarkClearAll<cr>", "Clear All" },
+  u = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
+}]]
+--
+
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["B"] = { "<cmd>FzfLua buffers<cr>", "Buffers" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["q"] = { "<cmd>q!<CR>", "Quit" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+  ["w"] = { "<cmd>w<CR>", "Write" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  ["f"] = { "<cmd>FzfLua files<cr>", "Find files" },
-  ["F"] = { "<cmd>FzfLua live_grep<cr>", "Find Text" },
+  ["q"] = { '<cmd>lua require("user.functions").smart_quit()<CR>', "Quit" },
+  ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["P"] = { "<cmd>FzfProject<cr>", "Projects" },
-  ["S"] = { "<cmd>lua require('spectre').open()<cr>", "Search/Replace" },
+  ["gy"] = "Link",
 
   b = {
     name = "Buffers",
@@ -109,6 +134,56 @@ local mappings = {
     s = { "<cmd>PackerSync<cr>", "Sync" },
     S = { "<cmd>PackerStatus<cr>", "Status" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
+  },
+
+  o = {
+    name = "Options",
+    w = { '<cmd>lua require("user.functions").toggle_option("wrap")<cr>', "Wrap" },
+    r = { '<cmd>lua require("user.functions").toggle_option("relativenumber")<cr>', "Relative" },
+    l = { '<cmd>lua require("user.functions").toggle_option("cursorline")<cr>', "Cursorline" },
+    s = { '<cmd>lua require("user.functions").toggle_option("spell")<cr>', "Spell" },
+    t = { '<cmd>lua require("user.functions").toggle_tabline()<cr>', "Tabline" },
+  },
+
+  W = {
+    name = "Window Split",
+    s = { "<cmd>split<cr>", "HSplit" },
+    v = { "<cmd>vsplit<cr>", "VSplit" },
+  },
+
+  r = {
+    name = "Replace",
+    r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
+    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
+    f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
+  },
+
+  --[[d = {
+    name = "Debug",
+    b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
+    c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+    i = { "<cmd>lua require'dap'.step_into()<cr>", "Into" },
+    o = { "<cmd>lua require'dap'.step_over()<cr>", "Over" },
+    O = { "<cmd>lua require'dap'.step_out()<cr>", "Out" },
+    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Repl" },
+    l = { "<cmd>lua require'dap'.run_last()<cr>", "Last" },
+    u = { "<cmd>lua require'dapui'.toggle()<cr>", "UI" },
+    x = { "<cmd>lua require'dap'.terminate()<cr>", "Exit" },
+  },]]
+  --
+
+  f = {
+    name = "Search",
+    b = { "<cmd>FzfLua git_branches<cr>", "Checkout branch" },
+    f = { "<cmd>FzfLua files<cr>", "Find files" },
+    t = { "<cmd>FzfLua live_grep<cr>", "Find Text" },
+    h = { "<cmd>FzfLua help_tags<cr>", "Help" },
+    l = { "<cmd>FzfLua resume<cr>", "Last Search" },
+    M = { "<cmd>FzfLua man_pages<cr>", "Man Pages" },
+    r = { "<cmd>FzfLua oldfiles<cr>", "Recent File" },
+    R = { "<cmd>FzfLua registers<cr>", "Registers" },
+    k = { "<cmd>FzfLua keymaps<cr>", "Keymaps" },
+    C = { "<cmd>FzfLua commands<cr>", "Commands" },
   },
 
   g = {
@@ -132,64 +207,94 @@ local mappings = {
       "<cmd>Gitsigns diffthis HEAD<cr>",
       "Diff",
     },
+    --[[G = {
+      name = "Gist",
+      a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
+      d = { "<cmd>Gist -d<cr>", "Delete" },
+      f = { "<cmd>Gist -f<cr>", "Fork" },
+      g = { "<cmd>Gist -b<cr>", "Create" },
+      l = { "<cmd>Gist -l<cr>", "List" },
+      p = { "<cmd>Gist -b -p<cr>", "Create Private" },
+    },]]
+    --
   },
 
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = {
-      "<cmd>FzfLua lsp_document_diagnostics<cr>",
-      "Document Diagnostics",
-    },
-    w = {
-      "<cmd>FzfLua lsp_workspace_diagnostics<cr>",
-      "Workspace Diagnostics",
-    },
+    d = { "<cmd>FzfLua lsp_document_diagnostics<cr>", "Document Diagnostics" },
+    w = { "<cmd>FzfLua lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    -- f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
+    h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    j = {
-      "<cmd>lua vim.diagnostic.goto_next()<CR>",
-      "Next Diagnostic",
-    },
-    k = {
-      "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-      "Prev Diagnostic",
-    },
+    j = { "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>", "Next Diagnostic" },
+    k = { "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Prev Diagnostic" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     o = { "<cmd>SymbolsOutline<cr>", "Outline" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
     s = { "<cmd>FzfLua lsp_document_symbols<cr>", "Document Symbols" },
-    S = {
-      "<cmd>FzfLua lsp_dynamic_workspace_symbols<cr>",
-      "Workspace Symbols",
-    },
+    S = { "<cmd>FzfLua lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
+    t = { '<cmd>lua require("user.functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
   },
-  s = {
-    name = "Search",
-    b = { "<cmd>FzfLua git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>FzfLua colorschemes<cr>", "Colorscheme" },
-    h = { "<cmd>FzfLua help_tags<cr>", "Find Help" },
-    M = { "<cmd>FzfLua man_pages<cr>", "Man Pages" },
-    r = { "<cmd>FzfLua oldfiles<cr>", "Open Recent File" },
-    R = { "<cmd>FzfLua registers<cr>", "Registers" },
-    k = { "<cmd>FzfLua keymaps<cr>", "Keymaps" },
-    C = { "<cmd>FzfLua commands<cr>", "Commands" },
-  },
+
+  --[[s = {
+    name = "Surround",
+    ["."] = { "<cmd>lua require('surround').repeat_last()<cr>", "Repeat" },
+    a = { "<cmd>lua require('surround').surround_add(true)<cr>", "Add" },
+    d = { "<cmd>lua require('surround').surround_delete()<cr>", "Delete" },
+    r = { "<cmd>lua require('surround').surround_replace()<cr>", "Replace" },
+    q = { "<cmd>lua require('surround').toggle_quotes()<cr>", "Quotes" },
+    b = { "<cmd>lua require('surround').toggle_brackets()<cr>", "Brackets" },
+  },]]
+  --
+
+  --[[S = {
+    name = "SnipRun",
+    c = { "<cmd>SnipClose<cr>", "Close" },
+    f = { "<cmd>%SnipRun<cr>", "Run File" },
+    i = { "<cmd>SnipInfo<cr>", "Info" },
+    m = { "<cmd>SnipReplMemoryClean<cr>", "Mem Clean" },
+    r = { "<cmd>SnipReset<cr>", "Reset" },
+    t = { "<cmd>SnipRunToggle<cr>", "Toggle" },
+    x = { "<cmd>SnipTerminate<cr>", "Terminate" },
+  },]]
+  --
 
   t = {
     name = "Terminal",
+    ["1"] = { ":1ToggleTerm<cr>", "1" },
+    ["2"] = { ":2ToggleTerm<cr>", "2" },
+    ["3"] = { ":3ToggleTerm<cr>", "3" },
+    ["4"] = { ":4ToggleTerm<cr>", "4" },
     n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
     u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
     t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    r = { "<cmd>lua _RAILS_TOGGLE()<cr>", "Rails" },
+    p = { "<cmd>lua _RAILS_TOGGLE()<cr>", "Rails" },
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
 }
 
+local vopts = {
+  mode = "v", -- VISUAL mode
+  prefix = "<leader>",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+local vmappings = {
+  ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
+  s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
+}
+
 which_key.setup(setup)
 which_key.register(mappings, opts)
+which_key.register(vmappings, vopts)
+-- which_key.register(m_mappings, m_opts)

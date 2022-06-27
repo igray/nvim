@@ -106,6 +106,8 @@ local m_mappings = {
 
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+  ["f"] = { "<cmd>FzfLua files<cr>", "Find Files" },
+  ["F"] = { "<cmd>FzfLua live_grep<cr>", "Find Text" },
   ["B"] = { "<cmd>FzfLua buffers<cr>", "Buffers" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w<CR>", "Write" },
@@ -172,7 +174,7 @@ local mappings = {
   },]]
   --
 
-  f = {
+  s = {
     name = "Search",
     b = { "<cmd>FzfLua git_branches<cr>", "Checkout branch" },
     f = { "<cmd>FzfLua files<cr>", "Find files" },
@@ -242,7 +244,7 @@ local mappings = {
     t = { '<cmd>lua require("user.functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
   },
 
-  --[[s = {
+  S = {
     name = "Surround",
     ["."] = { "<cmd>lua require('surround').repeat_last()<cr>", "Repeat" },
     a = { "<cmd>lua require('surround').surround_add(true)<cr>", "Add" },
@@ -250,8 +252,7 @@ local mappings = {
     r = { "<cmd>lua require('surround').surround_replace()<cr>", "Replace" },
     q = { "<cmd>lua require('surround').toggle_quotes()<cr>", "Quotes" },
     b = { "<cmd>lua require('surround').toggle_brackets()<cr>", "Brackets" },
-  },]]
-  --
+  },
 
   --[[S = {
     name = "SnipRun",

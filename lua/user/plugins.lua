@@ -62,6 +62,7 @@ return packer.startup(function(use)
   use "ibhagwan/fzf-lua"
   use "norcalli/nvim-colorizer.lua"
   use "rcarriga/nvim-notify"
+  use "Mephistophiles/surround.nvim"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out

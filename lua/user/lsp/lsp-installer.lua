@@ -6,6 +6,7 @@ end
 local servers = {
   "cssls",
   "cssmodules_ls",
+  "elmls",
   "emmet_ls",
   "html",
   "jsonls",

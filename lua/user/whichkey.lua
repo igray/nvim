@@ -115,7 +115,6 @@ local mappings = {
   ["q"] = { '<cmd>lua require("user.functions").smart_quit()<CR>', "Quit" },
   ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  ["P"] = { "<cmd>FzfProject<cr>", "Projects" },
   ["gy"] = "Link",
 
   b = {
@@ -182,6 +181,7 @@ local mappings = {
     h = { "<cmd>FzfLua help_tags<cr>", "Help" },
     l = { "<cmd>FzfLua resume<cr>", "Last Search" },
     M = { "<cmd>FzfLua man_pages<cr>", "Man Pages" },
+    p = { "<cmd>FzfProject<cr>", "Projects" },
     r = { "<cmd>FzfLua oldfiles<cr>", "Recent File" },
     R = { "<cmd>FzfLua registers<cr>", "Registers" },
     k = { "<cmd>FzfLua keymaps<cr>", "Keymaps" },

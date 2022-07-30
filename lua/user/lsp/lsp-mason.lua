@@ -1,23 +1,9 @@
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+local status_ok, mason = pcall(require, "mason")
 if not status_ok then
   return
 end
 
-local servers = {
-  "cssls",
-  "cssmodules_ls",
-  "elmls",
-  "emmet_ls",
-  "html",
-  "jsonls",
-  "sumneko_lua",
-  "tsserver",
-  "yamlls",
-  "bashls",
-}
-
-local settings = {
-  ensure_installed = servers,
+local mason_settings = {
   -- automatic_installation = false,
   ui = {
     icons = {
@@ -44,7 +30,29 @@ local settings = {
   -- install_root_dir = path.concat { vim.fn.stdpath "data", "lsp_servers" },
 }
 
-lsp_installer.setup(settings)
+mason.setup(mason_settings)
+
+local lsp_status_ok, lsp_mason = pcall(require, "mason-lspconfig")
+if not lsp_status_ok then
+  return
+end
+
+local servers = {
+  "cssls",
+--  "cssmodules_ls",
+  "elmls",
+--  "emmet_ls",
+  "html",
+  "jsonls",
+  "sumneko_lua",
+  "tsserver",
+  "yamlls",
+  "bashls",
+}
+
+lsp_mason.setup {
+  ensure_installed = servers,
+}
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then

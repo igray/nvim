@@ -123,7 +123,7 @@ local mappings = {
     f = { "<cmd>FzfLua buffers<cr>", "Find" },
     b = { "<cmd>b#<cr>", "Previous" },
     h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
-    l = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the right" },
+    l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
     D = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
     L = { "<cmd>BufferLineSortByExtension<cr>", "Sort by extension" },
   },

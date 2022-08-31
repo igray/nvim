@@ -82,7 +82,7 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", emmet_ls_opts, opts)
   end
 
-  if server.name == "tailwindcss" then
+  if server == "tailwindcss" then
     local tailwind_opts = require("user.lsp.settings.tailwindcss")
     opts = vim.tbl_deep_extend("force", tailwind_opts, opts)
   end

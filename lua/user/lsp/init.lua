@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 require "user.lsp.solargraph"
+require "user.lsp.hls"
 require "user.lsp.gleam"
 require "user.lsp.lsp-signature"
 require "user.lsp.lsp-mason"

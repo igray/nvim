@@ -31,10 +31,14 @@ end
 
 -- Have packer use a popup window
 packer.init {
+  -- snapshot = "july-24",
+  snapshot_path = fn.stdpath "config" .. "/snapshots",
+  max_jobs = 50,
   display = {
     open_fn = function()
       return require("packer.util").float { border = "rounded" }
     end,
+    prompt_border = "rounded", -- Border style of prompt popups.
   },
 }
 
@@ -42,7 +46,25 @@ packer.init {
 return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
+
+  -- Lua Development
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+
+  -- LSP
+  use "neovim/nvim-lspconfig" -- enable LSP
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "ray-x/lsp_signature.nvim"
+  use "SmiteshP/nvim-navic"
+  use "simrat39/symbols-outline.nvim"
+  use "b0o/SchemaStore.nvim"
+  use "RRethy/vim-illuminate"
+  use "j-hui/fidget.nvim"
+  use "lvimuser/lsp-inlayhints.nvim"
+  -- use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+
+
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
@@ -77,26 +99,13 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-emoji"
 
-  -- snippets
+  -- Snippet
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
-  -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
-  -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-  use "simrat39/symbols-outline.nvim"
-  use "ray-x/lsp_signature.nvim"
-  use "RRethy/vim-illuminate"
-  use "b0o/SchemaStore.nvim"
+  -- Syntax/Treesitter
+  use "nvim-treesitter/nvim-treesitter"
 
-  -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  }
   use "JoosepAlviste/nvim-ts-context-commentstring"
   use "p00f/nvim-ts-rainbow"
   use "windwp/nvim-ts-autotag"

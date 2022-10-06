@@ -87,6 +87,11 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", tailwind_opts, opts)
   end
 
+  if server == "elmls" then
+    local elmls_opts = require("user.lsp.settings.elmls")
+    opts = vim.tbl_deep_extend("force", elmls_opts, opts)
+  end
+
   lspconfig[server].setup(opts)
 end
 

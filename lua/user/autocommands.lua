@@ -21,6 +21,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   callback = function()
     vim.cmd [[
       nnoremap <silent> <buffer> q :close<CR> 
+      nnoremap <silent> <buffer> <esc> :close<CR> 
       set nobuflisted 
     ]]
   end,
@@ -62,12 +63,6 @@ vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
     vim.cmd "quit"
   end,
 })
-
--- vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
---   callback = function()
---     require("user.winbar").get_winbar()
---   end,
--- })
 
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   callback = function()

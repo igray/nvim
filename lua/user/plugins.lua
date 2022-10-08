@@ -44,7 +44,7 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- My plugins here
+  -- Plugin Mangager
   use "wbthomason/packer.nvim" -- Have packer manage itself
 
   -- Lua Development
@@ -64,33 +64,7 @@ return packer.startup(function(use)
   use "lvimuser/lsp-inlayhints.nvim"
   -- use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
 
-
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "numToStr/Comment.nvim" -- Easily comment stuff
-  use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
-  use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
-  -- use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim"
-  use "folke/which-key.nvim"
-  use "tpope/vim-rails"
-  use "ellisonleao/glow.nvim"
-  use "windwp/nvim-spectre"
-  use "ibhagwan/fzf-lua"
-  use "norcalli/nvim-colorizer.lua"
-  use "rcarriga/nvim-notify"
-  use "Mephistophiles/surround.nvim"
-
-  -- Colorschemes
-  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use "ishan9299/nvim-solarized-lua"
-
-  -- cmp plugins
+  -- Completion
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
@@ -105,13 +79,152 @@ return packer.startup(function(use)
 
   -- Syntax/Treesitter
   use "nvim-treesitter/nvim-treesitter"
-
   use "JoosepAlviste/nvim-ts-context-commentstring"
   use "p00f/nvim-ts-rainbow"
   use "windwp/nvim-ts-autotag"
+  -- use "nvim-treesitter/nvim-treesitter-textobjects"
+  -- use "wellle/targets.vim"
+  -- use "RRethy/nvim-treesitter-textsubjects"
+  use "kylechui/nvim-surround"
+  --[[ use {
+    "abecodes/tabout.nvim",
+    wants = { "nvim-treesitter" }, -- or require if not used so far
+  } ]]
+
+  -- Marks
+  -- use "christianchiarulli/harpoon"
+  -- use "MattesGroeger/vim-bookmarks"
+
+  -- Fuzzy Finder/Telescope
+  use "ibhagwan/fzf-lua"
+  -- use "nvim-telescope/telescope.nvim"
+  -- use "nvim-telescope/telescope-media-files.nvim"
+  -- use "tom-anders/telescope-vim-bookmarks.nvim"
+
+  -- Note Taking
+  -- use "mickael-menu/zk-nvim"
+
+  -- Color
+  use "NvChad/nvim-colorizer.lua"
+  -- use "ziontee113/color-picker.nvim"
+  -- use "nvim-colortils/colortils.nvim"
+
+  -- Colorschemes
+  use "ishan9299/nvim-solarized-lua"
+  -- use "lunarvim/onedarker.nvim"
+  -- use "lunarvim/darkplus.nvim"
+  -- use "folke/tokyonight.nvim"
+  -- use "lunarvim/colorschemes"
+
+  -- Utility
+  use "rcarriga/nvim-notify"
+  -- use "stevearc/dressing.nvim"
+  -- use "ghillb/cybu.nvim"
+  use "moll/vim-bbye"
+  use "lewis6991/impatient.nvim"
+  -- use "lalitmee/browse.nvim"
+
+  -- Registers
+  -- use "tversteeg/registers.nvim"
+
+  -- Icon
+  use "kyazdani42/nvim-web-devicons"
+
+  -- Debugging
+  -- use "mfussenegger/nvim-dap"
+  -- use "rcarriga/nvim-dap-ui"
+  -- use "theHamsta/nvim-dap-virtual-text"
+  -- use "Pocco81/DAPInstall.nvim"
+
+  -- Tabline
+  use "akinsho/bufferline.nvim"
+  -- use "tiagovla/scope.nvim"
+
+  -- Statusline
+  use "nvim-lualine/lualine.nvim"
+
+  -- Startup
+  use "goolord/alpha-nvim"
+
+  -- Indent
+  -- use "lukas-reineke/indent-blankline.nvim"
+
+  -- File Explorer
+  use "kyazdani42/nvim-tree.lua"
+  -- use "christianchiarulli/lir.nvim"
+
+  -- Comment
+  use "numToStr/Comment.nvim"
+  -- use "folke/todo-comments.nvim"
+
+  -- Terminal
+  use "akinsho/toggleterm.nvim"
+
+  -- Project
+  use "ahmedkhalf/project.nvim"
+  use "windwp/nvim-spectre"
+
+  -- Session
+  -- use "rmagatti/auto-session"
+  -- use "rmagatti/session-lens"
+
+  -- Quickfix
+  -- use "kevinhwang91/nvim-bqf"
+
+  -- Code Runner
+  -- use "is0n/jaq-nvim"
+  --[[ use {
+    "0x100101/lab.nvim",
+    run = "cd js && npm ci",
+  } ]]
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+  -- use "f-person/git-blame.nvim"
+  -- use "ruifm/gitlinker.nvim"
+  -- use "mattn/vim-gist"
+  -- use "mattn/webapi-vim"
+
+  -- Github
+  -- use "pwntester/octo.nvim"
+
+  -- Editing Support
+  use "windwp/nvim-autopairs"
+  -- use "monaqa/dial.nvim"
+  -- use "nacro90/numb.nvim"
+  -- use "andymass/vim-matchup"
+  -- use "folke/zen-mode.nvim"
+  -- use "Pocco81/true-zen.nvim"
+  -- use "karb94/neoscroll.nvim"
+  -- use "junegunn/vim-slash"
+
+  -- Motion
+  -- use "phaazon/hop.nvim"
+  -- use "jinh0/eyeliner.nvim"
+
+  -- Keybinding
+  use "folke/which-key.nvim"
+
+  -- Ruby
+  use "tpope/vim-rails"
+
+  -- Java
+  -- use "mfussenegger/nvim-jdtls"
+
+  -- Rust
+  -- use { "christianchiarulli/rust-tools.nvim", branch = "modularize_and_inlay_rewrite" }
+  -- use "Saecki/crates.nvim"
+
+  -- Typescript TODO: set this up, also add keybinds to ftplugin
+  -- use "jose-elias-alvarez/typescript.nvim"
+
+  -- Markdown
+  use "ellisonleao/glow.nvim"
+  -- use {
+  --   "iamcco/markdown-preview.nvim",
+  --   run = "cd app && npm install",
+  --   ft = "markdown",
+  -- }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

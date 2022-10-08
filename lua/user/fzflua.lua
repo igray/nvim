@@ -4,14 +4,14 @@ if not status_ok then
 end
 
 fzflua.setup({
-	previewers = {
-		builtin = {
-			extensions = {
-				["png"] = { "viu", "-b" },
-				["jpg"] = { "viu", "-b" },
-				["jpeg"] = { "viu", "-b" },
-				["gif"] = { "viu", "-b" },
-			},
-		},
-	},
+  previewers = {
+    builtin = {
+      extensions = {
+        ["png"] = { "viu", "-b" },
+        ["jpg"] = { "viu", "-b" },
+        ["jpeg"] = { "viu", "-b" },
+        ["gif"] = { "viu", "-b" },
+      },
+    },
+  },
 })

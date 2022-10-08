@@ -43,8 +43,16 @@ local mode = {
   padding = 0,
 }
 
+local hide_in_width_60 = function()
+  return vim.o.columns > 60
+end
+
 local hide_in_width = function()
-  return vim.fn.winwidth(0) > 80
+  return vim.o.columns > 80
+end
+
+local hide_in_width_100 = function()
+  return vim.o.columns > 100
 end
 
 local icons = require "user.icons"
@@ -53,7 +61,10 @@ local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
-  symbols = { error = icons.diagnostics.Error .. " ", warn = icons.diagnostics.Warning .. " " },
+  symbols = {
+    error = "%#SLError#" .. icons.diagnostics.Error .. "%*" .. " ",
+    warn = "%#SLWarning#" .. icons.diagnostics.Warning .. "%*" .. " ",
+  },
   colored = false,
   update_in_insert = false,
   always_visible = true,
@@ -63,7 +74,7 @@ local diff = {
   "diff",
   colored = false,
   symbols = { added = icons.git.Add .. " ", modified = icons.git.Mod .. " ", removed = icons.git.Remove .. " " }, -- changes diff symbols
-  cond = hide_in_width,
+  cond = hide_in_width_60,
   separator = "%#SLSeparator#" .. "│ " .. "%*",
 }
 
@@ -76,8 +87,17 @@ local filetype = {
 local branch = {
   "branch",
   icons_enabled = true,
-  icon = "%#SLGitIcon#" .. "" .. "%*" .. "%#SLBranchName#",
+  icon = "%#SLGitIcon#" .. " " .. "%*" .. "%#SLBranchName#",
+  -- color = "Constant",
   colored = false,
+  -- cond = hide_in_width_100,
+  fmt = function(str)
+    if str == "" or str == nil then
+      return "!=vcs"
+    end
+
+    return str
+  end,
 }
 
 local progress = {
